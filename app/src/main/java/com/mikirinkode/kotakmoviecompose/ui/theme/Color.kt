@@ -2,7 +2,15 @@ package com.mikirinkode.kotakmoviecompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Primary500 = Color(0xFF03DAC5)
+val Primary700 = Color(0xFF018786)
+
+val Secondary500 = Color(0xFF2083F8)
+val Secondary700 = Color(0xFF08284C)
+val Secondary900 = Color(0xFF132030)
+
+val Dark500 = Color(0xFF0E1621)
+val Dark400 = Color(0xFF17212B)
+val Light200 = Color(0xFFBFC8D2)
+val Light500 = Color(0xFF7F91A4)
+val PlaceholderColor = Color(0xFF2A323C)

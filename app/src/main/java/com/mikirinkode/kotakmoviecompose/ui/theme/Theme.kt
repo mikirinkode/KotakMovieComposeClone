@@ -5,17 +5,22 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
+    primary = Primary500,
+    primaryVariant = Primary700,
+    secondary = Secondary700,
+    secondaryVariant = Secondary900,
 
-private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    background = Dark500,
+    surface = Dark500,
+
+    onPrimary = Dark400,
+    onSecondary = Color.White, // Used as Text Color
+    onBackground = Light200,
+    onSurface = Light200,
+
 
     /* Other default colors to override
     background = Color.White,
@@ -29,14 +34,9 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun KotakMovieComposeTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    val colors = DarkColorPalette
 
     MaterialTheme(
         colors = colors,
