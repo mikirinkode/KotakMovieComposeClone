@@ -18,8 +18,8 @@ private val DarkColorPalette = darkColors(
 
     onPrimary = Dark400,
     onSecondary = Color.White, // Used as Text Color
-    onBackground = Light200,
-    onSurface = Light200,
+    onBackground = Light500,
+    onSurface = Light500,
 
 
     /* Other default colors to override

@@ -32,21 +32,22 @@ fun TrendingMovieItem(
     rating: Double,
     modifier: Modifier = Modifier
 ) {
+    val gradient = Brush.verticalGradient(
+        0f to Color.Transparent,
+        1000f to MaterialTheme.colors.background
+    )
+
     Card(
         backgroundColor = MaterialTheme.colors.secondaryVariant,
-        shape = RoundedCornerShape(16f),
+        shape = RoundedCornerShape(16.dp),
         modifier = modifier
-            .padding(top = 16.dp, start = 16.dp)
-            .fillMaxWidth()
+            .padding(top = 16.dp, start = 16.dp, bottom = 16.dp)
+            .wrapContentSize()
     ) {
         Box(
             modifier = modifier
-                .fillMaxWidth()
+                .wrapContentSize()
         ) {
-            val gradient = Brush.verticalGradient(
-                0f to Color.Transparent,
-                1000f to MaterialTheme.colors.background
-            )
             AsyncImage(
                 model = imageUrl,
                 contentDescription = "$title Image",

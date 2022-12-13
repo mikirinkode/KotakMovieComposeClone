@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Kotak Movie Compose</string>
     <string name="rating_icon">Rating Icon</string>
+    <string name="trending_this_week">Trending this Week</string>
+    <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="top_rated_tv_shows">Top Rated TV Shows</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_movie">Movie</string>
+    <string name="menu_tv_show">TV Show</string>
+    <string name="menu_playlist">Playlist</string>
+    <string name="empty_playlist_illustration">Empty Playlist Illustration</string>
+    <string name="empty_playlist_description">You have not added an item to playlist.</string>
+    <string name="empty_playlist_title">Empty Playlist.</string>
 </resources>

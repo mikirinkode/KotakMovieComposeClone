@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,11 +31,16 @@ fun CompactMovieItem(
     rating: Double,
     modifier: Modifier = Modifier
 ) {
+    val gradient = Brush.verticalGradient(
+        0f to Color.Transparent,
+        1000f to MaterialTheme.colors.background
+    )
+
     Card(
-        shape = RoundedCornerShape(16f),
+        shape = RoundedCornerShape(16.dp),
         backgroundColor = MaterialTheme.colors.secondaryVariant,
         modifier = modifier
-            .padding(16.dp)
+            .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
             .wrapContentSize()
     ) {
         Box(modifier = Modifier){
@@ -42,7 +49,8 @@ fun CompactMovieItem(
                 contentDescription = "movie poster",
                 modifier = Modifier
                     .size(width = 100.dp, height = 150.dp)
-                    .clip(RoundedCornerShape(16f))
+                    .background(brush = gradient)
+                    .clip(RoundedCornerShape(16.dp))
             )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
