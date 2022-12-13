@@ -3,13 +3,11 @@ package com.mikirinkode.kotakmoviecompose.ui.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
@@ -37,11 +35,12 @@ import com.mikirinkode.kotakmoviecompose.ui.theme.KotakMovieComposeTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
-    val dummyList = DummyData.getDummyMovieList()
+    val movieList = DummyData.getDummyMovieList()
+    val tvList = DummyData.getDummyTvShowList()
     HomeContent(
-        dummyList,
-        dummyList,
-        dummyList,
+        movieList,
+        movieList,
+        tvList,
     )
 }
 
@@ -52,91 +51,70 @@ fun HomeContent(
     topRatedTvList: List<Movie>,
     modifier: Modifier = Modifier
 ) {
-    val testList = listOf<String>(
-        "Lorem Ipsum Sir Dolor Amet apakah bisa lebih panjang",
-        "Lorem Ipsum",
-        "Lorem Ipsum",
-        "Lorem Ipsum",
-    )
-    Column(
-        modifier = modifier
-    ) {
-        LazyRow(){
-            items(testList) {item ->
-                Card(
-                    backgroundColor = MaterialTheme.colors.secondaryVariant,
-                    shape = RoundedCornerShape(16f),
-                    modifier = modifier
-                        .padding(top = 16.dp, start = 16.dp)
-                        .fillMaxWidth()
-                ) {
-                    Box(
-                        modifier = modifier.fillMaxWidth()
-                    ){
-                        Image(
-                            painter = painterResource(id = R.drawable.poster_alita),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = modifier
-                                .size(width = 320.dp, height = 180.dp)
-                                .aspectRatio(16f / 9f)
-                        )
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(id = R.string.menu_home))
+                },
+                backgroundColor = MaterialTheme.colors.secondaryVariant
+            )
+        },
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = modifier.padding(innerPadding)
+        ){
+            item {
+                SectionTitle(title = stringResource(R.string.trending_this_week))
+                LazyRow(
+                    modifier = Modifier,
+                    contentPadding = PaddingValues(end = 16.dp)
+                ){
+                    items(trendingList) { movie ->
+                        TrendingMovieItem(imageUrl = movie.backdropPath ?: "", title = movie.title ?: "", rating = movie.voteAverage)
+                    }
+                }
 
-                        Row(
-                            modifier = Modifier
-                                .align(Alignment.BottomStart)
-                                .width(320.dp)
-                                .padding(8.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = item,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(end = 8.dp)
-                            )
-                            Row(
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Rounded.Star,
-                                    contentDescription = stringResource(R.string.rating_icon),
-                                    tint = MaterialTheme.colors.primary
-                                )
-                            }
-                        }
+                SectionTitle(title = stringResource(R.string.upcoming_movies))
+                LazyRow(
+                    modifier = Modifier,
+                    contentPadding = PaddingValues(end = 16.dp)
+                ){
+                    items(upcomingMovieList){ movie ->
+                        CompactMovieItem(imageUrl = movie.posterPath ?: "", rating = movie.voteAverage)
+                    }
+                }
+
+                SectionTitle(title = stringResource(R.string.top_rated_tv_shows))
+                LazyRow(
+                    modifier = Modifier,
+                    contentPadding = PaddingValues(end = 16.dp)
+                ){
+                    items(topRatedTvList){ movie ->
+                        CompactMovieItem(imageUrl = movie.posterPath ?: "", rating = movie.voteAverage)
                     }
                 }
             }
         }
-        LazyRow(
-            modifier = Modifier
-        ){
-            items(trendingList) { movie ->
-                TrendingMovieItem(imageUrl = movie.backdropPath ?: "", title = movie.title ?: "", rating = movie.voteAverage)
-            }
-        }
-
-        LazyRow(
-        ){
-            items(upcomingMovieList){ movie ->
-                CompactMovieItem(imageUrl = movie.posterPath ?: "", rating = movie.voteAverage)
-            }
-        }
-
-        LazyRow(
-        ){
-            items(topRatedTvList){ movie ->
-                CompactMovieItem(imageUrl = movie.posterPath ?: "", rating = movie.voteAverage)
-            }
-        }
     }
+
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun SectionTitle(
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = title,
+        fontSize = 16.sp,
+        color = Color.White,
+        modifier = modifier
+            .padding(start = 16.dp, top = 16.dp)
+    )
+}
+
+@Preview(showSystemUi = true, showBackground = true, backgroundColor = 0xFF0E1621)
 @Composable
 fun HomeScreenPreview() {
     KotakMovieComposeTheme {
