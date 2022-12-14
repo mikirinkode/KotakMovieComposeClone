@@ -2,6 +2,7 @@ package com.mikirinkode.kotakmoviecompose.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +31,7 @@ fun TrendingMovieItem(
     imageUrl: String,
     title: String,
     rating: Double,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val gradient = Brush.verticalGradient(
@@ -43,6 +45,7 @@ fun TrendingMovieItem(
         modifier = modifier
             .padding(top = 16.dp, start = 16.dp, bottom = 16.dp)
             .wrapContentSize()
+            .clickable { onClick() }
     ) {
         Box(
             modifier = modifier
@@ -100,7 +103,8 @@ fun TrendingMovieItemPreview() {
         TrendingMovieItem(
             imageUrl = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg",
             "Alita: Battle Angle",
-            20.0
+            20.0,
+            {}
         )
     }
 }

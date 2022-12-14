@@ -61,7 +61,7 @@ fun MovieItem(
                 contentDescription = "$title poster",
                 modifier = Modifier
                     .size(width = 100.dp, height = 150.dp)
-                    .clip(RoundedCornerShape(16f))
+                    .clip(RoundedCornerShape(16.dp))
                     .background(color = MaterialTheme.colors.background)
             )
             Column(
