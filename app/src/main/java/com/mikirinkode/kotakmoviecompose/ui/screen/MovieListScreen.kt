@@ -31,36 +31,36 @@ fun MovieListScreen(modifier: Modifier = Modifier) {
     }
 
     val dropdownMenuItems = listOf("Popular", "Newest Release", "Oldest Release", "Best Vote", "Random")
-
-    Column {
-        TopAppBar(
-            title = {
-                Text(text = stringResource(id = R.string.menu_movie))
-            },
-            actions = {
-                IconButton(onClick = { showMenu = !showMenu }) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "More Menu"
-                    )
-                }
-                DropdownMenu(
-                    expanded = showMenu,
-                    onDismissRequest = { showMenu = false },
-                    modifier = Modifier
-                        .align(Alignment.Bottom)
-                ) {
-                    for (item in dropdownMenuItems){
-                        MyDropDownItem(selected = selected, title = item, onClick = {
-                            selected = item
-                            showMenu = false})
-                    }
-                }
-            },
-            backgroundColor = MaterialTheme.colors.secondaryVariant
-        )
-        MovieListComponent(list = dummyList)
-    }
+//
+//    Column {
+//        TopAppBar(
+//            title = {
+//                Text(text = stringResource(id = R.string.menu_movie))
+//            },
+//            actions = {
+//                IconButton(onClick = { showMenu = !showMenu }) {
+//                    Icon(
+//                        imageVector = Icons.Default.MoreVert,
+//                        contentDescription = "More Menu"
+//                    )
+//                }
+//                DropdownMenu(
+//                    expanded = showMenu,
+//                    onDismissRequest = { showMenu = false },
+//                    modifier = Modifier
+//                        .align(Alignment.Bottom)
+//                ) {
+//                    for (item in dropdownMenuItems){
+//                        MyDropDownItem(selected = selected, title = item, onClick = {
+//                            selected = item
+//                            showMenu = false})
+//                    }
+//                }
+//            },
+//            backgroundColor = MaterialTheme.colors.secondaryVariant
+//        )
+//        MovieListComponent(list = dummyList)
+//    }
 }
 
 
