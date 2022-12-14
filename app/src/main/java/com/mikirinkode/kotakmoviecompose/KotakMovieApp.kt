@@ -16,10 +16,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.mikirinkode.kotakmoviecompose.ui.navigation.NavigationItem
 import com.mikirinkode.kotakmoviecompose.ui.navigation.Screen
 import com.mikirinkode.kotakmoviecompose.ui.screen.*
@@ -30,9 +32,14 @@ fun KotakMovieApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(navController)
+            if (currentRoute != Screen.DetailMovie.route) {
+                BottomBar(navController)
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -42,7 +49,11 @@ fun KotakMovieApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    navigateToDetail = { movieId ->
+                        navController.navigate(Screen.DetailMovie.createRoute(movieId))
+                    }
+                )
             }
             composable(Screen.Search.route) {
                 SearchScreen()
@@ -55,6 +66,22 @@ fun KotakMovieApp(
             }
             composable(Screen.Playlist.route) {
                 PlaylistScreen()
+            }
+
+            composable(
+                route = Screen.DetailMovie.route,
+                arguments = listOf(navArgument("movieId") { type = NavType.IntType }),
+            ) {
+                val id = it.arguments?.getInt("movieId") ?: 1
+                DetailScreen(
+                    movieId = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    },
+                    navigateToTrailerScreen = {
+
+                    }
+                )
             }
         }
     }
@@ -111,7 +138,7 @@ fun BottomBar(
                 BottomNavigationItem(
                     icon = {
                         Icon(
-                            painter = if(currentRoute == item.screen.route) item.iconSelected else item.iconUnselected,
+                            painter = if (currentRoute == item.screen.route) item.iconSelected else item.iconUnselected,
                             contentDescription = item.title,
                             modifier = Modifier.size(24.dp)
                         )

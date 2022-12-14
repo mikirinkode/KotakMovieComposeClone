@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/PunyaDicoding/AndroidJetpackCompose/KotakMovieCompose/app/src/main/res/drawable/ic_movie_unselected.xml" value="0.231" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/PunyaDicoding/AndroidJetpackCompose/KotakMovieCompose/app/src/main/res/drawable/no_internet.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/PunyaDicoding/AndroidJetpackCompose/KotakMovieCompose/app/src/main/res/drawable/search_empty_result_illustration.xml" value="0.2325" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/PunyaDicoding/AndroidJetpackCompose/KotakMovieCompose/app/src/main/res/drawable/toggle_movie.xml" value="0.1585" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/PunyaDicoding/AndroidJetpackCompose/KotakMovieCompose/app/src/main/res/drawable/toggle_playlist.xml" value="0.1585" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/PunyaDicoding/AndroidJetpackCompose/KotakMovieCompose/app/src/main/res/drawable/toggle_search.xml" value="0.1585" />

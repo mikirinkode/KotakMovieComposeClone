@@ -2,6 +2,7 @@ package com.mikirinkode.kotakmoviecompose.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -34,6 +35,7 @@ import com.mikirinkode.kotakmoviecompose.ui.theme.KotakMovieComposeTheme
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    navigateToDetail: (Int) -> Unit
 ) {
     val movieList = DummyData.getDummyMovieList()
     val tvList = DummyData.getDummyTvShowList()
@@ -41,6 +43,7 @@ fun HomeScreen(
         movieList,
         movieList,
         tvList,
+        navigateToDetail
     )
 }
 
@@ -49,7 +52,8 @@ fun HomeContent(
     trendingList: List<Movie>,
     upcomingMovieList: List<Movie>,
     topRatedTvList: List<Movie>,
-    modifier: Modifier = Modifier
+    navigateToDetail: (Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         topBar = {
@@ -63,15 +67,22 @@ fun HomeContent(
     ) { innerPadding ->
         LazyColumn(
             modifier = modifier.padding(innerPadding)
-        ){
+        ) {
             item {
                 SectionTitle(title = stringResource(R.string.trending_this_week))
                 LazyRow(
                     modifier = Modifier,
                     contentPadding = PaddingValues(end = 16.dp)
-                ){
+                ) {
                     items(trendingList) { movie ->
-                        TrendingMovieItem(imageUrl = movie.backdropPath ?: "", title = movie.title ?: "", rating = movie.voteAverage)
+                        TrendingMovieItem(
+                            imageUrl = movie.backdropPath ?: "",
+                            title = movie.title ?: "",
+                            rating = movie.voteAverage,
+                            onClick = {
+                                navigateToDetail(movie.id)
+                            }
+                        )
                     }
                 }
 
@@ -79,9 +90,12 @@ fun HomeContent(
                 LazyRow(
                     modifier = Modifier,
                     contentPadding = PaddingValues(end = 16.dp)
-                ){
-                    items(upcomingMovieList){ movie ->
-                        CompactMovieItem(imageUrl = movie.posterPath ?: "", rating = movie.voteAverage)
+                ) {
+                    items(upcomingMovieList) { movie ->
+                        CompactMovieItem(
+                            imageUrl = movie.posterPath ?: "",
+                            rating = movie.voteAverage
+                        )
                     }
                 }
 
@@ -89,9 +103,12 @@ fun HomeContent(
                 LazyRow(
                     modifier = Modifier,
                     contentPadding = PaddingValues(end = 16.dp)
-                ){
-                    items(topRatedTvList){ movie ->
-                        CompactMovieItem(imageUrl = movie.posterPath ?: "", rating = movie.voteAverage)
+                ) {
+                    items(topRatedTvList) { movie ->
+                        CompactMovieItem(
+                            imageUrl = movie.posterPath ?: "",
+                            rating = movie.voteAverage
+                        )
                     }
                 }
             }
@@ -118,6 +135,6 @@ fun SectionTitle(
 @Composable
 fun HomeScreenPreview() {
     KotakMovieComposeTheme {
-        HomeScreen()
+        HomeScreen(navigateToDetail = {})
     }
 }
